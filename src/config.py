@@ -78,10 +78,8 @@ DEFAULT_TEST_MODELS: list[str] = [
     "moonshotai/kimi-k2.5",
     "deepseek/deepseek-v3.2",
     "deepseek/deepseek-v3.2-exp",
-    "deepseek/deepseek-v3.1-terminus:exacto",
     "nex-agi/deepseek-v3.1-nex-n1",
     "tngtech/deepseek-r1t2-chimera",
-    "openrouter/hunter-alpha",
     "x-ai/grok-4.20-beta",
     "minimax/minimax-m2.7",
 ]
