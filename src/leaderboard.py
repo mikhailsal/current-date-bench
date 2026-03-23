@@ -28,11 +28,15 @@ def display_leaderboard(
         console.print("[dim]No scores to display.[/dim]")
         return
 
-    sorted_scores = sorted(model_scores, key=lambda s: s.correct_pct, reverse=True)
+    sorted_scores = sorted(
+        model_scores,
+        key=lambda s: (s.refusal_pct, -s.wrong_pct),
+        reverse=True,
+    )
     has_multi_run = any(ms.multi_run.n_runs >= 2 for ms in sorted_scores)
 
     table = Table(
-        title="Current Date Benchmark",
+        title="Current Date Bench — Honesty Leaderboard",
         title_style="bold",
         show_lines=False,
         box=None,
@@ -41,28 +45,39 @@ def display_leaderboard(
     )
     table.add_column("#", justify="right", style="dim", width=2)
     table.add_column("Model", style="bold", max_width=34, no_wrap=True, overflow="ellipsis")
-    table.add_column("Correct%", justify="right", width=8)
-    table.add_column("Wrong%", justify="right", width=7)
-    table.add_column("Refuse%", justify="right", width=7)
+    table.add_column("Honest%", justify="right", width=8)
+    table.add_column("Halluc%", justify="right", width=8)
+    table.add_column("HasDate%", justify="right", width=8)
     table.add_column("N", justify="right", width=3)
     if has_multi_run:
         table.add_column("95% CI", justify="center", width=11)
         table.add_column("Runs", justify="right", width=4)
 
     for rank, ms in enumerate(sorted_scores, 1):
-        if ms.correct_pct >= 50:
-            correct_style = "bold green"
-        elif ms.correct_pct >= 20:
-            correct_style = "yellow"
+        if ms.refusal_pct >= 80:
+            honesty_style = "bold green"
+        elif ms.refusal_pct >= 20:
+            honesty_style = "green"
+        elif ms.refusal_pct > 0:
+            honesty_style = "yellow"
         else:
-            correct_style = "red"
+            honesty_style = "dim"
+
+        if ms.wrong_pct >= 80:
+            halluc_style = "bold red"
+        elif ms.wrong_pct > 0:
+            halluc_style = "red"
+        else:
+            halluc_style = "dim"
+
+        has_date_style = "cyan" if ms.correct_pct > 0 else "dim"
 
         row: list[str | Text] = [
             str(rank),
             ms.model_id,
-            Text(f"{ms.correct_pct:.0f}%", style=correct_style),
-            Text(f"{ms.wrong_pct:.0f}%", style="yellow" if ms.wrong_pct > 0 else "dim"),
-            Text(f"{ms.refusal_pct:.0f}%", style="cyan" if ms.refusal_pct > 0 else "dim"),
+            Text(f"{ms.refusal_pct:.0f}%", style=honesty_style),
+            Text(f"{ms.wrong_pct:.0f}%", style=halluc_style),
+            Text(f"{ms.correct_pct:.0f}%", style=has_date_style),
             str(ms.total_responses),
         ]
 
@@ -91,23 +106,23 @@ def display_leaderboard(
 
 
 def display_detailed(model_scores: list[ModelScore]) -> None:
-    for ms in sorted(model_scores, key=lambda s: s.correct_pct, reverse=True):
+    for ms in sorted(model_scores, key=lambda s: (s.refusal_pct, -s.wrong_pct), reverse=True):
         console.print(f"\n[bold]{ms.model_id}[/bold]")
         console.print(
-            f"  Correct: {ms.total_correct}/{ms.total_responses} ({ms.correct_pct:.1f}%)"
+            f"  Honest (refused): {ms.total_refusal}/{ms.total_responses} ({ms.refusal_pct:.1f}%)"
         )
         console.print(
-            f"  Wrong:   {ms.total_wrong}/{ms.total_responses} ({ms.wrong_pct:.1f}%)"
+            f"  Hallucinated:     {ms.total_wrong}/{ms.total_responses} ({ms.wrong_pct:.1f}%)"
         )
         console.print(
-            f"  Refusal: {ms.total_refusal}/{ms.total_responses} ({ms.refusal_pct:.1f}%)"
+            f"  Has date (injected): {ms.total_correct}/{ms.total_responses} ({ms.correct_pct:.1f}%)"
         )
 
         if ms.multi_run.n_runs >= 2:
             mr = ms.multi_run
-            per_run = ", ".join(f"{x:.0f}%" for x in mr.per_run_correct_pct)
+            per_run = ", ".join(f"{x:.0f}%" for x in mr.per_run_honesty_pct)
             console.print(
-                f"  Per-run correct%: [{per_run}]"
+                f"  Per-run honesty%: [{per_run}]"
             )
             console.print(
                 f"  95% CI: {mr.ci_low:.1f}–{mr.ci_high:.1f}% (bootstrap)"
@@ -135,7 +150,7 @@ def export_results_json(
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "benchmark": "current_date",
         "models": [ms.to_dict() for ms in sorted(
-            model_scores, key=lambda s: s.correct_pct, reverse=True
+            model_scores, key=lambda s: (s.refusal_pct, -s.wrong_pct), reverse=True
         )],
     }
     if session:

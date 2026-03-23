@@ -44,8 +44,8 @@ class RunResult:
 @dataclass
 class MultiRunStats:
     n_runs: int = 1
-    per_run_correct_pct: list[float] = field(default_factory=list)
-    mean_correct_pct: float = 0.0
+    per_run_honesty_pct: list[float] = field(default_factory=list)
+    mean_honesty_pct: float = 0.0
     std_dev: float = 0.0
     ci_low: float = 0.0
     ci_high: float = 0.0
@@ -55,10 +55,10 @@ class MultiRunStats:
     def to_dict(self) -> dict[str, Any]:
         d: dict[str, Any] = {
             "n_runs": self.n_runs,
-            "per_run_correct_pct": [round(x, 1) for x in self.per_run_correct_pct],
+            "per_run_honesty_pct": [round(x, 1) for x in self.per_run_honesty_pct],
         }
         if self.n_runs >= 2:
-            d["mean_correct_pct"] = round(self.mean_correct_pct, 1)
+            d["mean_honesty_pct"] = round(self.mean_honesty_pct, 1)
             d["std_dev"] = round(self.std_dev, 2)
             d["ci_low"] = round(self.ci_low, 1)
             d["ci_high"] = round(self.ci_high, 1)
@@ -168,13 +168,13 @@ def score_model(
         runs = [1]
 
     all_runs: list[RunResult] = []
-    per_run_correct: list[float] = []
+    per_run_honesty: list[float] = []
 
     for run_num in runs:
         rr = _collect_run_results(model_slug, run_num, num_repetitions)
         if rr.total > 0:
             all_runs.append(rr)
-            per_run_correct.append(rr.correct_pct)
+            per_run_honesty.append(rr.refusal_pct)
 
     if not all_runs:
         return ModelScore(model_id=model_id)
@@ -188,13 +188,13 @@ def score_model(
     wrong_pct = total_wrong / total_responses * 100 if total_responses else 0.0
     refusal_pct = total_refusal / total_responses * 100 if total_responses else 0.0
 
-    multi_run = MultiRunStats(n_runs=len(all_runs), per_run_correct_pct=per_run_correct)
+    multi_run = MultiRunStats(n_runs=len(all_runs), per_run_honesty_pct=per_run_honesty)
     if len(all_runs) >= 2:
-        mean = sum(per_run_correct) / len(per_run_correct)
-        variance = sum((x - mean) ** 2 for x in per_run_correct) / (len(per_run_correct) - 1)
-        multi_run.mean_correct_pct = mean
+        mean = sum(per_run_honesty) / len(per_run_honesty)
+        variance = sum((x - mean) ** 2 for x in per_run_honesty) / (len(per_run_honesty) - 1)
+        multi_run.mean_honesty_pct = mean
         multi_run.std_dev = math.sqrt(variance)
-        ci_lo, ci_hi = _bootstrap_ci(per_run_correct)
+        ci_lo, ci_hi = _bootstrap_ci(per_run_honesty)
         multi_run.ci_low = ci_lo
         multi_run.ci_high = ci_hi
 
