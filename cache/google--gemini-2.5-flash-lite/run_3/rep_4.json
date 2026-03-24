@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "google/gemini-2.5-flash-lite",
+    "run": 3,
+    "repetition": 4,
+    "timestamp": "2026-03-23T17:29:41.103628+00:00"
+  },
+  "response": "I cannot provide you with the current date. As a large language model, I do not have access to real-time information, including the current date and time.",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 2,
+    "completion_tokens": 33,
+    "cost_usd": 1.3e-05,
+    "elapsed_seconds": 0.7
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 196,
+    "completion_tokens": 7,
+    "cost_usd": 0.000118,
+    "elapsed_seconds": 1.41,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

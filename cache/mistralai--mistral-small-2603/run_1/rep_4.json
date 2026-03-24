@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "mistralai/mistral-small-2603",
+    "run": 1,
+    "repetition": 4,
+    "timestamp": "2026-03-23T17:55:54.551686+00:00"
+  },
+  "response": "Today is **June 5, 2025**.",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 17,
+    "completion_tokens": 14,
+    "cost_usd": 1.1e-05,
+    "elapsed_seconds": 0.43
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 176,
+    "completion_tokens": 8,
+    "cost_usd": 0.000111,
+    "elapsed_seconds": 2.56,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}

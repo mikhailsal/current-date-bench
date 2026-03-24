@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "model": "moonshotai/kimi-k2.5",
+    "run": 2,
+    "repetition": 3,
+    "timestamp": "2026-03-23T18:03:18.514330+00:00"
+  },
+  "response": "",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 28,
+    "completion_tokens": 768,
+    "cost_usd": 0.002415,
+    "elapsed_seconds": 39.91
+  },
+  "judge_scores": null,
+  "judge_cost": null
+}

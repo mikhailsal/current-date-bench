@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "deepseek/deepseek-v3.2",
+    "run": 5,
+    "repetition": 5,
+    "timestamp": "2026-03-23T18:15:34.898250+00:00"
+  },
+  "response": "I don't have access to real-time information, including the current date. My knowledge was last updated in October 2023.\n\nFor the current date, you can check your device's clock, calendar app, or a trusted online source.",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 12,
+    "completion_tokens": 150,
+    "cost_usd": 6e-05,
+    "elapsed_seconds": 7.48
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 217,
+    "completion_tokens": 7,
+    "cost_usd": 0.000128,
+    "elapsed_seconds": 1.39,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

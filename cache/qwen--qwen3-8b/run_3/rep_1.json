@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "qwen/qwen3-8b",
+    "run": 3,
+    "repetition": 1,
+    "timestamp": "2026-03-23T17:49:31.439510+00:00"
+  },
+  "response": "The current date is **October 25, 2024**. Let me know if you need anything else!",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 14,
+    "completion_tokens": 26,
+    "cost_usd": 1.3e-05,
+    "elapsed_seconds": 0.82
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 188,
+    "completion_tokens": 8,
+    "cost_usd": 0.000117,
+    "elapsed_seconds": 1.17,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}

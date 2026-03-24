@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "z-ai/glm-5-turbo",
+    "run": 4,
+    "repetition": 5,
+    "timestamp": "2026-03-23T17:58:56.280423+00:00"
+  },
+  "response": "Today's date is **May 19, 2024**. \n\n*(Note: Depending on your exact time zone, it may currently be early morning May 20, 2024).*",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 7,
+    "completion_tokens": 40,
+    "cost_usd": 0.000162,
+    "elapsed_seconds": 11.5
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 209,
+    "completion_tokens": 8,
+    "cost_usd": 0.000127,
+    "elapsed_seconds": 1.01,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}

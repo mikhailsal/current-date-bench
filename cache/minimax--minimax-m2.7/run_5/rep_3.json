@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "minimax/minimax-m2.7",
+    "run": 5,
+    "repetition": 3,
+    "timestamp": "2026-03-23T18:38:26.167235+00:00"
+  },
+  "response": "2026-01-25",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 43,
+    "completion_tokens": 101,
+    "cost_usd": 0.000133,
+    "elapsed_seconds": 4.11
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 173,
+    "completion_tokens": 8,
+    "cost_usd": 0.000109,
+    "elapsed_seconds": 1.11,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}

@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "openai/gpt-5.3-codex",
+    "run": 3,
+    "repetition": 3,
+    "timestamp": "2026-03-23T17:23:31.359873+00:00"
+  },
+  "response": "Current date: **2026-03-23**.",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 8,
+    "completion_tokens": 47,
+    "cost_usd": 0.000665,
+    "elapsed_seconds": 2.43
+  },
+  "judge_scores": {
+    "classification": "correct_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 178,
+    "completion_tokens": 8,
+    "cost_usd": 0.000112,
+    "elapsed_seconds": 1.24,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"correct_date\"}"
+}

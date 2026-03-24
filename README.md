@@ -209,6 +209,92 @@ current-date-bench leaderboard
 current-date-bench leaderboard --detailed
 ```
 
+## Raw Data
+
+All model responses are published in the `cache/` directory. Each file is a self-contained JSON record:
+
+```
+cache/{provider}--{model}/run_{N}/rep_{M}.json
+```
+
+Example (`cache/anthropic--claude-opus-4.6/run_1/rep_1.json`):
+
+```json
+{
+  "metadata": {
+    "model": "anthropic/claude-opus-4.6",
+    "run": 1,
+    "repetition": 1,
+    "timestamp": "2026-03-23T17:27:06.417221+00:00"
+  },
+  "response": "The current date is **July 10, 2025**. *(Note: My knowledge has a cutoff of early April 2024, but I'm aware of today's date.)*",
+  "request_messages": [{"role": "user", "content": "current date"}],
+  "gen_cost": {
+    "prompt_tokens": 9,
+    "completion_tokens": 43,
+    "cost_usd": 0.001109,
+    "elapsed_seconds": 2.82
+  },
+  "judge_scores": {"classification": "wrong_date"},
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}
+```
+
+Aggregate results are in `results/results_*.json`.
+
+## Contributing
+
+We welcome contributions! The easiest way to help is to **run the benchmark on a model that's not yet in the leaderboard** and submit a pull request.
+
+### Adding a New Model
+
+1. Fork and clone the repo:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/current-date-bench.git
+cd current-date-bench
+python -m venv .venv && source .venv/bin/activate
+pip install -e .
+echo "OPENROUTER_API_KEY=sk-or-..." > .env
+```
+
+2. Run the benchmark on your model (must be available on [OpenRouter](https://openrouter.ai/)):
+
+```bash
+current-date-bench run -m your-provider/your-model --runs 5
+```
+
+3. Verify the results look correct:
+
+```bash
+current-date-bench leaderboard --detailed
+```
+
+4. Commit the new cache files and submit a PR:
+
+```bash
+git checkout -b add-your-model-name
+git add cache/
+git commit -m "Add benchmark results for your-provider/your-model"
+git push -u origin add-your-model-name
+```
+
+Then open a pull request. Include the leaderboard output in the PR description so we can see how the model performed.
+
+### Other Ways to Contribute
+
+- **More runs on existing models** — run `current-date-bench run -m existing/model --runs 10` for tighter confidence intervals
+- **Re-run with a different date** — results may vary over time as providers update system prompts; use `--date-override YYYY-MM-DD` if running on a different day
+- **Improve the judge prompt** — if you find misclassifications in `cache/`, open an issue
+- **Add new providers** — the benchmark works with any model available on OpenRouter
+
+### Contribution Guidelines
+
+- Always use **5 runs minimum** (`--runs 5`) for new models
+- Don't modify existing cache files — only add new ones
+- Include the model's full OpenRouter ID (e.g. `anthropic/claude-sonnet-4.6`, not just `claude`)
+- If a model is not on OpenRouter, open an issue and we'll discuss alternatives
+
 ## Project Structure
 
 ```
@@ -223,10 +309,10 @@ current-date-bench/
 │   ├── openrouter_client.py # OpenRouter API wrapper
 │   ├── cost_tracker.py     # Token & cost tracking
 │   └── cache.py            # Response caching
-├── cache/                  # Cached responses (gitignored)
-├── results/                # JSON exports (gitignored)
+├── cache/                  # All model responses (published, browse them!)
+├── results/                # Aggregate JSON exports
 ├── pyproject.toml
-└── .env                    # API key (gitignored)
+└── .env                    # Your API key (gitignored)
 ```
 
 ## License

@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "deepseek/deepseek-v3.2",
+    "run": 5,
+    "repetition": 3,
+    "timestamp": "2026-03-23T18:15:03.735739+00:00"
+  },
+  "response": "The current date is Friday, October 11, 2024.",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 12,
+    "completion_tokens": 128,
+    "cost_usd": 5.1e-05,
+    "elapsed_seconds": 6.34
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 180,
+    "completion_tokens": 8,
+    "cost_usd": 0.000113,
+    "elapsed_seconds": 1.02,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}

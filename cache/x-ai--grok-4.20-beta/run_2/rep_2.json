@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "x-ai/grok-4.20-beta",
+    "run": 2,
+    "repetition": 2,
+    "timestamp": "2026-03-23T18:31:51.469806+00:00"
+  },
+  "response": "**October 17, 2024**",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 126,
+    "completion_tokens": 485,
+    "cost_usd": 0.003016,
+    "elapsed_seconds": 5.19
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 175,
+    "completion_tokens": 8,
+    "cost_usd": 0.00011,
+    "elapsed_seconds": 1.2,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}

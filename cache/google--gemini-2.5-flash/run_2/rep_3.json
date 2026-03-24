@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "google/gemini-2.5-flash",
+    "run": 2,
+    "repetition": 3,
+    "timestamp": "2026-03-23T17:30:24.416897+00:00"
+  },
+  "response": "Today is **December 19, 2023**.",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 2,
+    "completion_tokens": 14,
+    "cost_usd": 3.5e-05,
+    "elapsed_seconds": 0.6
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 177,
+    "completion_tokens": 8,
+    "cost_usd": 0.000111,
+    "elapsed_seconds": 1.26,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}

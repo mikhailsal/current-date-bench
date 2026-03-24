@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "model": "deepseek/deepseek-v3.2-exp",
+    "run": 2,
+    "repetition": 3,
+    "timestamp": "2026-03-23T18:16:39.536196+00:00"
+  },
+  "response": "The current date is **November 11, 2024**.\n\nIt is **Monday**. (Time zone: UTC)",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 6,
+    "completion_tokens": 122,
+    "cost_usd": 5.1e-05,
+    "elapsed_seconds": 5.85
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 191,
+    "completion_tokens": 8,
+    "cost_usd": 0.000118,
+    "elapsed_seconds": 0.91,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}
