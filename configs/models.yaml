@@ -142,6 +142,7 @@ models:
   - model_id: z-ai/glm-5
     temperature: 0.7
     reasoning_effort: none
+    provider: z-ai
 
   - model_id: z-ai/glm-5-turbo
     temperature: 0.7
@@ -155,7 +156,6 @@ models:
     temperature: 0.7
     reasoning_effort: none
     provider: moonshotai/int4
-    display_label: kimi-k2.5+moonshot@none-t0.7
 
   # ───────────────────────────────────────────────────────────────
   # DeepSeek
@@ -205,7 +205,6 @@ models:
     temperature: 1.0
     reasoning_effort: high
     provider: moonshotai/int4
-    display_label: kimi-k2.5+moonshot@high-t1.0
 
   - model_id: stepfun/step-3.5-flash:free
     temperature: 1.0
@@ -219,10 +218,8 @@ models:
     temperature: 1.0
     reasoning_effort: high
     provider: minimax
-    display_label: minimax-m2.7+minimax@high-t1.0
 
   - model_id: xiaomi/mimo-v2-flash
     temperature: 1.0
     reasoning_effort: high
     provider: xiaomi
-    display_label: mimo-v2-flash+xiaomi@high-t1.0

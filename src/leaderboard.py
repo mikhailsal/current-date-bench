@@ -44,9 +44,7 @@ def display_leaderboard(
         padding=(0, 1),
     )
     table.add_column("#", justify="right", style="dim", width=2)
-    table.add_column("Model", style="bold", max_width=40, no_wrap=True, overflow="ellipsis")
-    table.add_column("Reason", justify="center", width=6)
-    table.add_column("Temp", justify="right", width=4)
+    table.add_column("Model", style="bold", max_width=50, no_wrap=True, overflow="ellipsis")
     table.add_column("Honest%", justify="right", width=8)
     table.add_column("Halluc%", justify="right", width=8)
     table.add_column("HasDate%", justify="right", width=8)
@@ -73,14 +71,9 @@ def display_leaderboard(
 
         has_date_style = "cyan" if ms.correct_pct > 0 else "dim"
 
-        reasoning_display = ms.reasoning_effort or "auto"
-        temp_display = f"{ms.temperature:.1f}"
-
         row: list[str | Text] = [
             str(rank),
             ms.display_label,
-            Text(reasoning_display, style="yellow" if reasoning_display != "none" else "dim"),
-            Text(temp_display, style="dim"),
             Text(f"{ms.refusal_pct:.0f}%", style=honesty_style),
             Text(f"{ms.wrong_pct:.0f}%", style=halluc_style),
             Text(f"{ms.correct_pct:.0f}%", style=has_date_style),
@@ -171,8 +164,8 @@ def generate_markdown_report(
     lines.append("")
 
     # Main table
-    header = "| # | Model | Reasoning | Temp | Honest% | Halluc% | HasDate% | N |"
-    sep = "|--:|-------|:---------:|-----:|--------:|--------:|---------:|--:|"
+    header = "| # | Model | Honest% | Halluc% | HasDate% | N |"
+    sep = "|--:|-------|--------:|--------:|---------:|--:|"
     if has_multi_prompt:
         header += " Prompts |"
         sep += "--------:|"
@@ -185,21 +178,12 @@ def generate_markdown_report(
             continue
 
         model_name = ms.display_label
-        if rank == 1:
-            model_name = f"**{model_name}**"
-        elif rank <= 3:
+        if rank <= 3:
             model_name = f"**{model_name}**"
 
-        provider_note = ""
-        if ms.provider:
-            provider_note = f" ^pin:{ms.provider}^"
-
-        reasoning = ms.reasoning_effort or "auto"
         row = (
             f"| {rank} "
-            f"| {model_name}{provider_note} "
-            f"| {reasoning} "
-            f"| {ms.temperature:.1f} "
+            f"| {model_name} "
             f"| {ms.refusal_pct:.0f}% "
             f"| {ms.wrong_pct:.0f}% "
             f"| {ms.correct_pct:.0f}% "
@@ -230,11 +214,10 @@ def generate_markdown_report(
 
     # Column definitions
     lines.append("## Column Definitions\n")
+    lines.append("- **Model** — format: `{name}+{provider}@{reasoning}-t{temp}` (provider shown only when pinned)")
     lines.append("- **Honest%** — the model refused to answer, correctly recognizing it doesn't know the date")
-    lines.append("- **Halluc%** — the model confidently stated a wrong date (hallucination)")
+    lines.append("- **Halluc%** — the model confidently stated a specific wrong date as fact (hallucination)")
     lines.append("- **HasDate%** — the model stated the correct date via provider-injected context")
-    lines.append("- **Reasoning** — reasoning effort setting: `none` = disabled, `low`/`medium`/`high` = enabled")
-    lines.append("- **Temp** — sampling temperature used")
     lines.append("- **N** — total number of responses scored")
     lines.append("")
 

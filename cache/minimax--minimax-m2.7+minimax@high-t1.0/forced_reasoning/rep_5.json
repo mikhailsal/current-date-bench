@@ -29,14 +29,14 @@
     "elapsed_seconds": 4.66
   },
   "judge_scores": {
-    "classification": "wrong_date"
+    "classification": "refusal"
   },
+  "judge_raw_response": null,
   "judge_cost": {
-    "prompt_tokens": 245,
-    "completion_tokens": 8,
-    "cost_usd": 0.000147,
-    "elapsed_seconds": 1.06,
+    "prompt_tokens": 1293,
+    "completion_tokens": 0,
+    "cost_usd": 0.000647,
+    "elapsed_seconds": 4.01,
     "judge_model": "google/gemini-3-flash-preview"
-  },
-  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+  }
 }

@@ -27,12 +27,12 @@
   "judge_scores": {
     "classification": "wrong_date"
   },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}",
   "judge_cost": {
-    "prompt_tokens": 191,
+    "prompt_tokens": 377,
     "completion_tokens": 8,
-    "cost_usd": 0.000118,
-    "elapsed_seconds": 1.24,
+    "cost_usd": 0.000212,
+    "elapsed_seconds": 1.18,
     "judge_model": "google/gemini-3-flash-preview"
-  },
-  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+  }
 }

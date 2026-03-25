@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "z-ai/glm-5",
+    "prompt_id": "current_date",
+    "repetition": 8,
+    "timestamp": "2026-03-25T14:12:00.932147+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": null
+    }
+  },
+  "response": "The current date is October 28, 2024.",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 7,
+    "completion_tokens": 12,
+    "cost_usd": 3.5e-05,
+    "elapsed_seconds": 2.11
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}",
+  "judge_cost": {
+    "prompt_tokens": 364,
+    "completion_tokens": 8,
+    "cost_usd": 0.000206,
+    "elapsed_seconds": 1.49,
+    "judge_model": "google/gemini-3-flash-preview"
+  }
+}

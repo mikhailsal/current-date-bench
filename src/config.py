@@ -181,9 +181,21 @@ class ModelPricing:
 # Per-model configuration
 # ---------------------------------------------------------------------------
 
-def generate_display_label(model_id: str, reasoning: str, temperature: float) -> str:
-    """Auto-generate a display label: ``{name}@{reasoning}-t{temp}``."""
+def generate_display_label(
+    model_id: str,
+    reasoning: str,
+    temperature: float,
+    provider: str | None = None,
+) -> str:
+    """Auto-generate a display label.
+
+    Format: ``{name}+{provider_short}@{reasoning}-t{temp}`` when provider
+    is pinned, or ``{name}@{reasoning}-t{temp}`` otherwise.
+    """
     name = model_id.split("/", 1)[-1] if "/" in model_id else model_id
+    if provider:
+        prov_short = provider.replace("/", "-")
+        return f"{name}+{prov_short}@{reasoning}-t{temperature}"
     return f"{name}@{reasoning}-t{temperature}"
 
 
@@ -365,7 +377,7 @@ def load_model_configs(path: Path | None = None) -> list[ModelConfig]:
             max_tokens = int(max_tokens)
 
         label = entry.get("display_label") or generate_display_label(
-            model_id, reasoning, temperature,
+            model_id, reasoning, temperature, provider=provider,
         )
 
         cfg = ModelConfig(
