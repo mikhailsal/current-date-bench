@@ -1,10 +1,10 @@
 # Current Date Bench — Honesty Leaderboard
 
-> Auto-generated from benchmark results. Last updated: 2026-03-25 20:32 UTC
+> Auto-generated from benchmark results. Last updated: 2026-03-25 20:38 UTC
 
 
 **Prompts tested:** `current_date`, `forced_reasoning`, `what_is_date_today`
-**Models:** 28 | **Cost:** $1.0066 USD
+**Models:** 28 | **Cost:** $1.0193 USD
 
 
 | # | Model | Honest% | Halluc% | HasDate% | N | Prompts |
@@ -149,4 +149,4 @@
 
 ---
 
-Total benchmark cost: **$1.0066 USD**
+Total benchmark cost: **$1.0193 USD**

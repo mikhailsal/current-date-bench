@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-25T20:32:35.490699+00:00",
+  "timestamp": "2026-03-25T20:38:37.739514+00:00",
   "benchmark": "current_date",
   "models": [
     {
@@ -1320,56 +1320,8 @@
     }
   ],
   "session_cost": {
-    "started_at": "2026-03-25T20:29:28.764618+00:00",
+    "started_at": "2026-03-25T20:35:46.835682+00:00",
     "tasks": [
-      {
-        "label": "gen:gemini-3.1-pro-preview@low-t0.7",
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "cost_usd": 0.0,
-        "elapsed_seconds": 0.0,
-        "n_calls": 0
-      },
-      {
-        "label": "judge:gemini-3.1-pro-preview@low-t0.7",
-        "prompt_tokens": 12026,
-        "completion_tokens": 231,
-        "cost_usd": 0.006706,
-        "elapsed_seconds": 39.35,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:llama-4-scout@none-t0.7",
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "cost_usd": 0.0,
-        "elapsed_seconds": 0.0,
-        "n_calls": 0
-      },
-      {
-        "label": "judge:llama-4-scout@none-t0.7",
-        "prompt_tokens": 12537,
-        "completion_tokens": 217,
-        "cost_usd": 0.006919,
-        "elapsed_seconds": 39.35,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:gemini-2.5-flash@none-t0.7",
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "cost_usd": 0.0,
-        "elapsed_seconds": 0.0,
-        "n_calls": 0
-      },
-      {
-        "label": "judge:gemini-2.5-flash@none-t0.7",
-        "prompt_tokens": 12307,
-        "completion_tokens": 224,
-        "cost_usd": 0.006825,
-        "elapsed_seconds": 40.26,
-        "n_calls": 30
-      },
       {
         "label": "gen:claude-sonnet-4.6@none-t0.7",
         "prompt_tokens": 0,
@@ -1380,75 +1332,11 @@
       },
       {
         "label": "judge:claude-sonnet-4.6@none-t0.7",
-        "prompt_tokens": 12662,
-        "completion_tokens": 220,
-        "cost_usd": 0.006991,
-        "elapsed_seconds": 40.4,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:claude-opus-4.5@none-t0.7",
         "prompt_tokens": 0,
         "completion_tokens": 0,
         "cost_usd": 0.0,
         "elapsed_seconds": 0.0,
         "n_calls": 0
-      },
-      {
-        "label": "judge:claude-opus-4.5@none-t0.7",
-        "prompt_tokens": 12887,
-        "completion_tokens": 220,
-        "cost_usd": 0.007104,
-        "elapsed_seconds": 41.07,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:claude-opus-4.6@none-t0.7",
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "cost_usd": 0.0,
-        "elapsed_seconds": 0.0,
-        "n_calls": 0
-      },
-      {
-        "label": "judge:claude-opus-4.6@none-t0.7",
-        "prompt_tokens": 13483,
-        "completion_tokens": 215,
-        "cost_usd": 0.007386,
-        "elapsed_seconds": 42.85,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:gemini-3-flash-preview@none-t0.7",
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "cost_usd": 0.0,
-        "elapsed_seconds": 0.0,
-        "n_calls": 0
-      },
-      {
-        "label": "judge:gemini-3-flash-preview@none-t0.7",
-        "prompt_tokens": 11554,
-        "completion_tokens": 240,
-        "cost_usd": 0.006497,
-        "elapsed_seconds": 42.98,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:gemini-3-pro-preview@low-t0.7",
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "cost_usd": 0.0,
-        "elapsed_seconds": 0.0,
-        "n_calls": 0
-      },
-      {
-        "label": "judge:gemini-3-pro-preview@low-t0.7",
-        "prompt_tokens": 11521,
-        "completion_tokens": 239,
-        "cost_usd": 0.006478,
-        "elapsed_seconds": 43.15,
-        "n_calls": 30
       },
       {
         "label": "gen:gpt-5.1-codex-mini@low-t1.0",
@@ -1460,11 +1348,75 @@
       },
       {
         "label": "judge:gpt-5.1-codex-mini@low-t1.0",
-        "prompt_tokens": 11531,
-        "completion_tokens": 233,
-        "cost_usd": 0.006464,
-        "elapsed_seconds": 44.55,
-        "n_calls": 30
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:claude-opus-4.5@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:claude-opus-4.5@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:gemini-3-flash-preview@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:gemini-3-flash-preview@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:claude-opus-4.6@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:claude-opus-4.6@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:gemini-2.5-flash@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:gemini-2.5-flash@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
       },
       {
         "label": "gen:gemini-2.5-flash-lite@none-t0.7",
@@ -1476,14 +1428,6 @@
       },
       {
         "label": "judge:gemini-2.5-flash-lite@none-t0.7",
-        "prompt_tokens": 12478,
-        "completion_tokens": 218,
-        "cost_usd": 0.006893,
-        "elapsed_seconds": 40.33,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:qwen3-8b@none-t0.7",
         "prompt_tokens": 0,
         "completion_tokens": 0,
         "cost_usd": 0.0,
@@ -1491,15 +1435,7 @@
         "n_calls": 0
       },
       {
-        "label": "judge:qwen3-8b@none-t0.7",
-        "prompt_tokens": 12352,
-        "completion_tokens": 230,
-        "cost_usd": 0.006866,
-        "elapsed_seconds": 38.9,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:mistral-small-3.2-24b-instruct@none-t0.7",
+        "label": "gen:gemini-3.1-pro-preview@low-t0.7",
         "prompt_tokens": 0,
         "completion_tokens": 0,
         "cost_usd": 0.0,
@@ -1507,12 +1443,44 @@
         "n_calls": 0
       },
       {
-        "label": "judge:mistral-small-3.2-24b-instruct@none-t0.7",
-        "prompt_tokens": 12504,
-        "completion_tokens": 230,
-        "cost_usd": 0.006942,
-        "elapsed_seconds": 38.41,
-        "n_calls": 30
+        "label": "judge:gemini-3.1-pro-preview@low-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:llama-4-scout@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:llama-4-scout@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:gemini-3-pro-preview@low-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:gemini-3-pro-preview@low-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
       },
       {
         "label": "gen:qwen3-coder@none-t0.7",
@@ -1524,11 +1492,27 @@
       },
       {
         "label": "judge:qwen3-coder@none-t0.7",
-        "prompt_tokens": 13520,
-        "completion_tokens": 210,
-        "cost_usd": 0.00739,
-        "elapsed_seconds": 40.28,
-        "n_calls": 30
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:qwen3-8b@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:qwen3-8b@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
       },
       {
         "label": "gen:qwen3-coder-next@none-t0.7",
@@ -1540,59 +1524,11 @@
       },
       {
         "label": "judge:qwen3-coder-next@none-t0.7",
-        "prompt_tokens": 13052,
-        "completion_tokens": 217,
-        "cost_usd": 0.007177,
-        "elapsed_seconds": 39.8,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:glm-5+z-ai@none-t0.7",
         "prompt_tokens": 0,
         "completion_tokens": 0,
         "cost_usd": 0.0,
         "elapsed_seconds": 0.0,
         "n_calls": 0
-      },
-      {
-        "label": "judge:glm-5+z-ai@none-t0.7",
-        "prompt_tokens": 12055,
-        "completion_tokens": 230,
-        "cost_usd": 0.006718,
-        "elapsed_seconds": 38.83,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:kimi-k2.5+moonshotai-int4@none-t0.7",
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "cost_usd": 0.0,
-        "elapsed_seconds": 0.0,
-        "n_calls": 0
-      },
-      {
-        "label": "judge:kimi-k2.5+moonshotai-int4@none-t0.7",
-        "prompt_tokens": 13226,
-        "completion_tokens": 216,
-        "cost_usd": 0.007261,
-        "elapsed_seconds": 41.2,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:deepseek-v3.2-exp@low-t0.7",
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "cost_usd": 0.0,
-        "elapsed_seconds": 0.0,
-        "n_calls": 0
-      },
-      {
-        "label": "judge:deepseek-v3.2-exp@low-t0.7",
-        "prompt_tokens": 12474,
-        "completion_tokens": 232,
-        "cost_usd": 0.006933,
-        "elapsed_seconds": 40.05,
-        "n_calls": 30
       },
       {
         "label": "gen:qwen3.5-flash-02-23@none-t0.7",
@@ -1604,11 +1540,11 @@
       },
       {
         "label": "judge:qwen3.5-flash-02-23@none-t0.7",
-        "prompt_tokens": 13363,
-        "completion_tokens": 224,
-        "cost_usd": 0.007354,
-        "elapsed_seconds": 40.42,
-        "n_calls": 30
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
       },
       {
         "label": "gen:mistral-small-2603@none-t0.7",
@@ -1620,11 +1556,59 @@
       },
       {
         "label": "judge:mistral-small-2603@none-t0.7",
-        "prompt_tokens": 11854,
-        "completion_tokens": 239,
-        "cost_usd": 0.006644,
-        "elapsed_seconds": 42.4,
-        "n_calls": 30
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:mistral-small-3.2-24b-instruct@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:mistral-small-3.2-24b-instruct@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:kimi-k2.5+moonshotai-int4@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:kimi-k2.5+moonshotai-int4@none-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:deepseek-v3.2-exp@low-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:deepseek-v3.2-exp@low-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
       },
       {
         "label": "gen:deepseek-v3.2@low-t0.7",
@@ -1636,11 +1620,11 @@
       },
       {
         "label": "judge:deepseek-v3.2@low-t0.7",
-        "prompt_tokens": 13632,
-        "completion_tokens": 215,
-        "cost_usd": 0.007461,
-        "elapsed_seconds": 43.47,
-        "n_calls": 30
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
       },
       {
         "label": "gen:deepseek-r1t2-chimera@low-t0.7",
@@ -1652,59 +1636,11 @@
       },
       {
         "label": "judge:deepseek-r1t2-chimera@low-t0.7",
-        "prompt_tokens": 12555,
-        "completion_tokens": 230,
-        "cost_usd": 0.006968,
-        "elapsed_seconds": 38.6,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:kimi-k2.5+moonshotai-int4@high-t1.0",
         "prompt_tokens": 0,
         "completion_tokens": 0,
         "cost_usd": 0.0,
         "elapsed_seconds": 0.0,
         "n_calls": 0
-      },
-      {
-        "label": "judge:kimi-k2.5+moonshotai-int4@high-t1.0",
-        "prompt_tokens": 15015,
-        "completion_tokens": 210,
-        "cost_usd": 0.008138,
-        "elapsed_seconds": 37.43,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:step-3.5-flash:free@high-t1.0",
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "cost_usd": 0.0,
-        "elapsed_seconds": 0.0,
-        "n_calls": 0
-      },
-      {
-        "label": "judge:step-3.5-flash:free@high-t1.0",
-        "prompt_tokens": 13067,
-        "completion_tokens": 225,
-        "cost_usd": 0.007209,
-        "elapsed_seconds": 39.67,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:grok-4.20-beta@low-t0.7",
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "cost_usd": 0.0,
-        "elapsed_seconds": 0.0,
-        "n_calls": 0
-      },
-      {
-        "label": "judge:grok-4.20-beta@low-t0.7",
-        "prompt_tokens": 14047,
-        "completion_tokens": 217,
-        "cost_usd": 0.007674,
-        "elapsed_seconds": 41.51,
-        "n_calls": 30
       },
       {
         "label": "gen:minimax-m2.7@low-t0.7",
@@ -1716,11 +1652,59 @@
       },
       {
         "label": "judge:minimax-m2.7@low-t0.7",
-        "prompt_tokens": 13030,
-        "completion_tokens": 222,
-        "cost_usd": 0.007181,
-        "elapsed_seconds": 46.11,
-        "n_calls": 30
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:grok-4.20-beta@low-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:grok-4.20-beta@low-t0.7",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:kimi-k2.5+moonshotai-int4@high-t1.0",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:kimi-k2.5+moonshotai-int4@high-t1.0",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:step-3.5-flash:free@high-t1.0",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:step-3.5-flash:free@high-t1.0",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
       },
       {
         "label": "gen:trinity-large-preview:free@high-t1.0",
@@ -1732,27 +1716,11 @@
       },
       {
         "label": "judge:trinity-large-preview:free@high-t1.0",
-        "prompt_tokens": 13231,
-        "completion_tokens": 227,
-        "cost_usd": 0.007297,
-        "elapsed_seconds": 42.7,
-        "n_calls": 30
-      },
-      {
-        "label": "gen:mimo-v2-flash+xiaomi@high-t1.0",
         "prompt_tokens": 0,
         "completion_tokens": 0,
         "cost_usd": 0.0,
         "elapsed_seconds": 0.0,
         "n_calls": 0
-      },
-      {
-        "label": "judge:mimo-v2-flash+xiaomi@high-t1.0",
-        "prompt_tokens": 15117,
-        "completion_tokens": 208,
-        "cost_usd": 0.008183,
-        "elapsed_seconds": 43.79,
-        "n_calls": 30
       },
       {
         "label": "gen:minimax-m2.7+minimax@high-t1.0",
@@ -1764,16 +1732,48 @@
       },
       {
         "label": "judge:minimax-m2.7+minimax@high-t1.0",
-        "prompt_tokens": 14062,
-        "completion_tokens": 213,
-        "cost_usd": 0.00767,
-        "elapsed_seconds": 42.59,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:mimo-v2-flash+xiaomi@high-t1.0",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "judge:mimo-v2-flash+xiaomi@high-t1.0",
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0.0,
+        "elapsed_seconds": 0.0,
+        "n_calls": 0
+      },
+      {
+        "label": "gen:glm-5+z-ai@none-t0.7",
+        "prompt_tokens": 2810,
+        "completion_tokens": 1388,
+        "cost_usd": 0.006023,
+        "elapsed_seconds": 123.99,
+        "n_calls": 30
+      },
+      {
+        "label": "judge:glm-5+z-ai@none-t0.7",
+        "prompt_tokens": 12008,
+        "completion_tokens": 230,
+        "cost_usd": 0.006694,
+        "elapsed_seconds": 45.41,
         "n_calls": 30
       }
     ],
-    "total_prompt_tokens": 361142,
-    "total_completion_tokens": 6252,
-    "total_cost_usd": 0.199327
+    "total_prompt_tokens": 14818,
+    "total_completion_tokens": 1618,
+    "total_cost_usd": 0.012717
   },
-  "lifetime_cost_usd": 1.006577
+  "lifetime_cost_usd": 1.019294
 }
