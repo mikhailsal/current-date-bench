@@ -33,10 +33,10 @@ def display_leaderboard(
         key=lambda s: (s.refusal_pct, -s.wrong_pct),
         reverse=True,
     )
-    has_multi_run = any(ms.multi_run.n_runs >= 2 for ms in sorted_scores)
+    has_multi_prompt = any(len(ms.prompt_results) > 1 for ms in sorted_scores)
 
     table = Table(
-        title="Current Date Bench — Honesty Leaderboard",
+        title="Current Date Bench -- Honesty Leaderboard",
         title_style="bold",
         show_lines=False,
         box=None,
@@ -44,14 +44,15 @@ def display_leaderboard(
         padding=(0, 1),
     )
     table.add_column("#", justify="right", style="dim", width=2)
-    table.add_column("Model", style="bold", max_width=34, no_wrap=True, overflow="ellipsis")
+    table.add_column("Model", style="bold", max_width=40, no_wrap=True, overflow="ellipsis")
+    table.add_column("Reason", justify="center", width=6)
+    table.add_column("Temp", justify="right", width=4)
     table.add_column("Honest%", justify="right", width=8)
     table.add_column("Halluc%", justify="right", width=8)
     table.add_column("HasDate%", justify="right", width=8)
     table.add_column("N", justify="right", width=3)
-    if has_multi_run:
-        table.add_column("95% CI", justify="center", width=11)
-        table.add_column("Runs", justify="right", width=4)
+    if has_multi_prompt:
+        table.add_column("Prompts", justify="right", width=7)
 
     for rank, ms in enumerate(sorted_scores, 1):
         if ms.refusal_pct >= 80:
@@ -72,24 +73,22 @@ def display_leaderboard(
 
         has_date_style = "cyan" if ms.correct_pct > 0 else "dim"
 
+        reasoning_display = ms.reasoning_effort or "auto"
+        temp_display = f"{ms.temperature:.1f}"
+
         row: list[str | Text] = [
             str(rank),
-            ms.model_id,
+            ms.display_label,
+            Text(reasoning_display, style="yellow" if reasoning_display != "none" else "dim"),
+            Text(temp_display, style="dim"),
             Text(f"{ms.refusal_pct:.0f}%", style=honesty_style),
             Text(f"{ms.wrong_pct:.0f}%", style=halluc_style),
             Text(f"{ms.correct_pct:.0f}%", style=has_date_style),
             str(ms.total_responses),
         ]
 
-        if has_multi_run:
-            mr = ms.multi_run
-            if mr.n_runs >= 2:
-                ci_text = Text(f"{mr.ci_low:.0f}–{mr.ci_high:.0f}%", style="dim")
-                runs_text = Text(str(mr.n_runs), style="cyan")
-            else:
-                ci_text = Text("—", style="dim")
-                runs_text = Text("1", style="dim")
-            row.extend([ci_text, runs_text])
+        if has_multi_prompt:
+            row.append(str(len(ms.prompt_results)))
 
         table.add_row(*row)
 
@@ -107,7 +106,11 @@ def display_leaderboard(
 
 def display_detailed(model_scores: list[ModelScore]) -> None:
     for ms in sorted(model_scores, key=lambda s: (s.refusal_pct, -s.wrong_pct), reverse=True):
-        console.print(f"\n[bold]{ms.model_id}[/bold]")
+        console.print(f"\n[bold]{ms.display_label}[/bold]")
+        console.print(
+            f"  Config: reasoning={ms.reasoning_effort}, temp={ms.temperature}"
+            + (f", provider={ms.provider}" if ms.provider else "")
+        )
         console.print(
             f"  Honest (refused): {ms.total_refusal}/{ms.total_responses} ({ms.refusal_pct:.1f}%)"
         )
@@ -118,22 +121,15 @@ def display_detailed(model_scores: list[ModelScore]) -> None:
             f"  Has date (injected): {ms.total_correct}/{ms.total_responses} ({ms.correct_pct:.1f}%)"
         )
 
-        if ms.multi_run.n_runs >= 2:
-            mr = ms.multi_run
-            per_run = ", ".join(f"{x:.0f}%" for x in mr.per_run_honesty_pct)
-            console.print(
-                f"  Per-run honesty%: [{per_run}]"
-            )
-            console.print(
-                f"  95% CI: {mr.ci_low:.1f}–{mr.ci_high:.1f}% (bootstrap)"
-            )
-
-        for rr in ms.runs:
-            console.print(
-                f"  [dim]Run {rr.run}: "
-                f"{rr.correct_date}✓ {rr.wrong_date}✗ {rr.refusal}? "
-                f"(of {rr.total})[/dim]"
-            )
+        if len(ms.prompt_results) > 1:
+            console.print("  [dim]Per-prompt breakdown:[/dim]")
+            for pr in ms.prompt_results:
+                console.print(
+                    f"    {pr.prompt_id}: "
+                    f"{pr.correct_date}v {pr.wrong_date}x {pr.refusal}? "
+                    f"(of {pr.total}) — "
+                    f"honest={pr.refusal_pct:.0f}% halluc={pr.wrong_pct:.0f}%"
+                )
 
 
 def export_results_json(

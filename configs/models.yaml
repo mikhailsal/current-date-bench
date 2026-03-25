@@ -1,0 +1,191 @@
+# Model configurations for Current Date Benchmark.
+#
+# Each entry defines a unique benchmark configuration. The same model_id can
+# appear multiple times with different temperature/reasoning settings.
+#
+# Fields:
+#   model_id           (required) — API model identifier
+#   temperature        (required) — sampling temperature
+#   reasoning_effort   (required) — reasoning effort: "none", "low", "medium", "high"
+#   active             (optional) — false to exclude from default runs (default: true)
+#   temperature_supported (optional) — false if provider ignores temperature (default: true)
+#   provider           (optional) — OpenRouter provider slug to pin requests to
+#   display_label      (optional) — auto-generated if omitted:
+#                                    {model_name}@{reasoning}-t{temp}
+
+# ─── Prompt configurations ────────────────────────────────────────────
+# Each prompt config defines a (system_prompt, user_prompt) pair.
+# All active models are tested against all active prompt configs.
+# The prompt_id is used in cache directory naming.
+prompts:
+  - prompt_id: current_date
+    system_prompt: ""
+    user_prompt: "current date"
+    active: true
+
+  - prompt_id: what_is_date_today
+    system_prompt: ""
+    user_prompt: "What is the date today?"
+    active: true
+
+  - prompt_id: tell_me_todays_date
+    system_prompt: ""
+    user_prompt: "Tell me today's date"
+    active: false
+
+  - prompt_id: assistant_current_date
+    system_prompt: "You are a helpful assistant."
+    user_prompt: "current date"
+    active: false
+
+  - prompt_id: assistant_what_date
+    system_prompt: "You are a helpful assistant."
+    user_prompt: "What is the date today?"
+    active: false
+
+# ─── Model configurations ─────────────────────────────────────────────
+models:
+  # ───────────────────────────────────────────────────────────────
+  # OpenAI — only 5.1-codex-mini (doesn't secretly inject date)
+  # GPT-5 series removed: they have mandatory hidden reasoning and
+  # OpenRouter injects the current date into the system prompt,
+  # making the test meaningless for those models.
+  # ───────────────────────────────────────────────────────────────
+  - model_id: openai/gpt-5.1-codex-mini
+    temperature: 1.0
+    reasoning_effort: low
+    temperature_supported: false
+
+  # ───────────────────────────────────────────────────────────────
+  # Anthropic — temperature supported, reasoning=none
+  # ───────────────────────────────────────────────────────────────
+  - model_id: anthropic/claude-sonnet-4.6
+    temperature: 0.7
+    reasoning_effort: none
+
+  - model_id: anthropic/claude-opus-4.5
+    temperature: 0.7
+    reasoning_effort: none
+
+  - model_id: anthropic/claude-opus-4.6
+    temperature: 0.7
+    reasoning_effort: none
+
+  # ───────────────────────────────────────────────────────────────
+  # Google — temperature supported
+  # ───────────────────────────────────────────────────────────────
+  - model_id: google/gemini-2.5-flash-lite
+    temperature: 0.7
+    reasoning_effort: none
+
+  - model_id: google/gemini-2.5-flash
+    temperature: 0.7
+    reasoning_effort: none
+
+  - model_id: google/gemini-3-flash-preview
+    temperature: 0.7
+    reasoning_effort: none
+
+  - model_id: google/gemini-3-pro-preview
+    temperature: 0.7
+    reasoning_effort: low
+
+  - model_id: google/gemini-3.1-pro-preview
+    temperature: 0.7
+    reasoning_effort: low
+
+  # ───────────────────────────────────────────────────────────────
+  # Meta
+  # ───────────────────────────────────────────────────────────────
+  - model_id: meta-llama/llama-4-scout
+    temperature: 0.7
+    reasoning_effort: none
+
+  # ───────────────────────────────────────────────────────────────
+  # Qwen
+  # ───────────────────────────────────────────────────────────────
+  - model_id: qwen/qwen3-8b
+    temperature: 0.7
+    reasoning_effort: none
+
+  - model_id: qwen/qwen3-coder
+    temperature: 0.7
+    reasoning_effort: none
+
+  - model_id: qwen/qwen3-coder-next
+    temperature: 0.7
+    reasoning_effort: none
+
+  - model_id: qwen/qwen3.5-flash-02-23
+    temperature: 0.7
+    reasoning_effort: none
+
+  # ───────────────────────────────────────────────────────────────
+  # Mistral
+  # ───────────────────────────────────────────────────────────────
+  - model_id: mistralai/mistral-small-3.2-24b-instruct
+    temperature: 0.7
+    reasoning_effort: none
+
+  - model_id: mistralai/mistral-small-2603
+    temperature: 0.7
+    reasoning_effort: none
+
+  # ───────────────────────────────────────────────────────────────
+  # Z-AI (GLM)
+  # ───────────────────────────────────────────────────────────────
+  - model_id: z-ai/glm-5
+    temperature: 0.7
+    reasoning_effort: none
+
+  - model_id: z-ai/glm-5-turbo
+    temperature: 0.7
+    reasoning_effort: none
+
+  # ───────────────────────────────────────────────────────────────
+  # Moonshot
+  # ───────────────────────────────────────────────────────────────
+  - model_id: moonshotai/kimi-k2.5
+    temperature: 0.7
+    reasoning_effort: none
+    provider: moonshotai/int4
+    display_label: kimi-k2.5+moonshot@none-t0.7
+
+  # ───────────────────────────────────────────────────────────────
+  # DeepSeek
+  # ───────────────────────────────────────────────────────────────
+  - model_id: deepseek/deepseek-v3.2
+    temperature: 0.7
+    reasoning_effort: low
+
+  - model_id: deepseek/deepseek-v3.2-exp
+    temperature: 0.7
+    reasoning_effort: low
+
+  # ───────────────────────────────────────────────────────────────
+  # Nex-AGI
+  # ───────────────────────────────────────────────────────────────
+  - model_id: nex-agi/deepseek-v3.1-nex-n1
+    temperature: 0.7
+    reasoning_effort: none
+
+  # ───────────────────────────────────────────────────────────────
+  # TNG Tech
+  # ───────────────────────────────────────────────────────────────
+  - model_id: tngtech/deepseek-r1t2-chimera
+    temperature: 0.7
+    reasoning_effort: low
+
+  # ───────────────────────────────────────────────────────────────
+  # X-AI (Grok)
+  # ───────────────────────────────────────────────────────────────
+  - model_id: x-ai/grok-4.20-beta
+    temperature: 0.7
+    reasoning_effort: low
+
+  # ───────────────────────────────────────────────────────────────
+  # MiniMax
+  # ───────────────────────────────────────────────────────────────
+  - model_id: minimax/minimax-m2.7
+    temperature: 0.7
+    reasoning_effort: low

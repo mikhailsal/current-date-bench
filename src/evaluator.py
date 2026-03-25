@@ -1,7 +1,7 @@
-"""Evaluator: calls the judge model to classify 'current date' responses.
+"""Evaluator: calls the judge model to classify responses.
 
 Three categories:
-  - correct_date: model answered with the correct date (within ±2 days tolerance)
+  - correct_date: model answered with the correct date (within +/-2 days tolerance)
   - wrong_date: model answered with a date, but it was wrong
   - refusal: model refused or said it doesn't know the date
 """
@@ -10,13 +10,13 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import date, datetime, timezone
+from datetime import date
 from typing import Any
 
 from rich.console import Console
 
 from src.cache import (
-    list_repetitions_in_run,
+    list_repetitions,
     load_cached_response,
     save_judge_scores,
 )
@@ -24,7 +24,8 @@ from src.config import (
     JUDGE_MAX_TOKENS,
     JUDGE_TEMPERATURE,
     NUM_REPETITIONS,
-    model_id_to_slug,
+    ModelConfig,
+    PromptConfig,
 )
 from src.cost_tracker import TaskCost
 from src.openrouter_client import OpenRouterClient
@@ -32,7 +33,7 @@ from src.openrouter_client import OpenRouterClient
 console = Console()
 
 _JUDGE_SYSTEM_PROMPT = """\
-You classify AI model responses to the question "current date".
+You classify AI model responses to the question "{user_prompt}".
 The actual date when the question was asked is: {actual_date}
 
 Respond with ONLY a JSON object with one field "classification" set to exactly one of:
@@ -106,49 +107,53 @@ def _call_judge(
     return result.content, scores, cost_info
 
 
-def evaluate_model(
+def evaluate_model_prompt(
     client: OpenRouterClient,
-    model_id: str,
+    model_config: ModelConfig,
+    prompt_config: PromptConfig,
     cost: TaskCost,
     judge_model: str,
     *,
-    run: int = 1,
     num_repetitions: int = NUM_REPETITIONS,
     actual_date: str | None = None,
 ) -> int:
-    """Judge all cached responses for a model in a given run.
+    """Judge all cached responses for a model+prompt combination.
 
     Returns the number of judge API calls made.
     """
-    model_slug = model_id_to_slug(model_id)
+    config_slug = model_config.config_slug
+    prompt_id = prompt_config.prompt_id
     calls_made = 0
-    tag = f"[bold]{model_id}[/bold]"
+    tag = f"[bold]{model_config.label}[/bold]"
 
     if actual_date is None:
         actual_date = date.today().isoformat()
 
     for rep in range(1, num_repetitions + 1):
-        cached = load_cached_response(model_slug, run, rep)
+        cached = load_cached_response(config_slug, prompt_id, rep)
         if not cached or not cached.get("response"):
             continue
 
         if cached.get("judge_scores"):
-            console.print(f"  {tag} [dim]judged: run {run} rep {rep}[/dim]")
+            console.print(f"  {tag} [dim]judged: {prompt_id}/rep_{rep}[/dim]")
             continue
 
         response = cached["response"]
 
-        judge_prompt = _JUDGE_SYSTEM_PROMPT.format(actual_date=actual_date)
+        judge_prompt = _JUDGE_SYSTEM_PROMPT.format(
+            user_prompt=prompt_config.user_prompt,
+            actual_date=actual_date,
+        )
         messages = [
             {"role": "system", "content": judge_prompt},
             {"role": "user", "content": f"Model response:\n\n{response}"},
         ]
 
         raw, scores, jcost = _call_judge(client, judge_model, messages, cost)
-        save_judge_scores(model_slug, run, rep, scores, raw, judge_cost=jcost)
+        save_judge_scores(config_slug, prompt_id, rep, scores, raw, judge_cost=jcost)
         calls_made += 1
         console.print(
-            f"  {tag} [green]judged[/green]: run {run} rep {rep} → {scores['classification']}"
+            f"  {tag} [green]judged[/green]: {prompt_id}/rep_{rep} -> {scores['classification']}"
         )
 
     return calls_made

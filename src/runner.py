@@ -1,4 +1,8 @@
-"""Runner: sends the 'current date' query to a model with an empty system prompt."""
+"""Runner: sends the configured prompt to a model and caches responses.
+
+Supports configurable system_prompt + user_prompt pairs, reasoning effort,
+temperature, provider pinning, and flat repetition structure.
+"""
 
 from __future__ import annotations
 
@@ -7,48 +11,64 @@ from typing import Any
 from rich.console import Console
 
 from src.cache import load_cached_response, save_response
-from src.config import RESPONSE_MAX_TOKENS, RESPONSE_TEMPERATURE, NUM_REPETITIONS, model_id_to_slug
+from src.config import (
+    NUM_REPETITIONS,
+    RESPONSE_MAX_TOKENS,
+    RESPONSE_TEMPERATURE,
+    ModelConfig,
+    PromptConfig,
+)
 from src.cost_tracker import TaskCost
 from src.openrouter_client import OpenRouterClient
 
 console = Console()
 
 
-def run_current_date_experiment(
+def run_prompt_experiment(
     client: OpenRouterClient,
-    model_id: str,
+    model_config: ModelConfig,
+    prompt_config: PromptConfig,
     cost: TaskCost,
     *,
-    run: int = 1,
     num_repetitions: int = NUM_REPETITIONS,
-    reasoning_effort: str | None = None,
-    temperature: float | None = None,
 ) -> int:
-    """Ask the model 'current date' N times with an empty system prompt.
+    """Ask the model the configured prompt N times.
 
     Returns the number of API calls made (excluding cache hits).
     """
-    model_slug = model_id_to_slug(model_id)
+    config_slug = model_config.config_slug
+    prompt_id = prompt_config.prompt_id
+    model_id = model_config.model_id
     calls_made = 0
-    tag = f"[bold]{model_id}[/bold]"
-    run_label = f" (run {run})" if run > 1 else ""
+    tag = f"[bold]{model_config.label}[/bold]"
+
+    temperature = model_config.effective_temperature
+    reasoning = model_config.effective_reasoning
+
+    settings_info = {
+        "temperature": temperature,
+        "reasoning_effort": reasoning,
+        "provider": model_config.provider,
+    }
 
     for rep in range(1, num_repetitions + 1):
-        cached = load_cached_response(model_slug, run, rep)
+        cached = load_cached_response(config_slug, prompt_id, rep)
         if cached and cached.get("response"):
-            console.print(f"  {tag} [dim]cached: rep {rep}{run_label}[/dim]")
+            console.print(f"  {tag} [dim]cached: {prompt_id}/rep_{rep}[/dim]")
             continue
 
-        messages: list[dict[str, Any]] = [
-            {"role": "user", "content": "current date"},
-        ]
+        messages: list[dict[str, Any]] = []
+        if prompt_config.system_prompt:
+            messages.append({"role": "system", "content": prompt_config.system_prompt})
+        messages.append({"role": "user", "content": prompt_config.user_prompt})
 
         result = client.chat(
             model=model_id,
             messages=messages,
             max_tokens=RESPONSE_MAX_TOKENS,
-            temperature=temperature if temperature is not None else RESPONSE_TEMPERATURE,
-            reasoning_effort=reasoning_effort,
+            temperature=temperature,
+            reasoning_effort=reasoning,
+            provider=model_config.provider,
         )
 
         cost.add(
@@ -66,10 +86,12 @@ def run_current_date_experiment(
         }
 
         save_response(
-            model_slug, run, rep, result.content, messages, model_id,
+            config_slug, prompt_id, rep, result.content, messages, model_id,
+            reasoning_content=result.reasoning_content,
             gen_cost=cost_info,
+            settings=settings_info,
         )
         calls_made += 1
-        console.print(f"  {tag} [green]done[/green]: rep {rep}{run_label}")
+        console.print(f"  {tag} [green]done[/green]: {prompt_id}/rep_{rep}")
 
     return calls_made

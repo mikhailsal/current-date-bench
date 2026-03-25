@@ -1,7 +1,6 @@
 """OpenRouter client: OpenAI SDK wrapper with retry logic, cost tracking, timing.
 
-Adapted from the AI Independence Benchmark — stripped of tool-call extraction
-since the Current Date Benchmark uses plain user-role messages only.
+Supports reasoning effort, provider pinning, and empty-content retries.
 """
 
 from __future__ import annotations
@@ -40,6 +39,7 @@ class CompletionResult:
     usage: UsageInfo = field(default_factory=UsageInfo)
     model: str = ""
     finish_reason: str = ""
+    reasoning_content: str | None = None
 
 
 def _usage_from_response(
@@ -134,7 +134,15 @@ class OpenRouterClient:
         temperature: float = 0.7,
         *,
         reasoning_effort: str | None = None,
+        provider: str | None = None,
     ) -> CompletionResult:
+        """Send a chat completion request with retry logic.
+
+        Args:
+            provider: OpenRouter provider slug to pin requests to (e.g.
+                ``"moonshotai/int4"``). Disables fallbacks so every call
+                is served by exactly this provider.
+        """
         use_reasoning = self._resolve_reasoning_effort(model, reasoning_effort)
         accumulated = UsageInfo()
 
@@ -143,6 +151,7 @@ class OpenRouterClient:
                 model=model, messages=messages,
                 max_tokens=max_tokens, temperature=temperature,
                 reasoning_effort=use_reasoning,
+                provider=provider,
             )
             accumulated.prompt_tokens += result.usage.prompt_tokens
             accumulated.completion_tokens += result.usage.completion_tokens
@@ -179,6 +188,7 @@ class OpenRouterClient:
         self, model: str, messages: list[dict[str, Any]],
         max_tokens: int, temperature: float,
         reasoning_effort: str | None = None,
+        provider: str | None = None,
     ) -> CompletionResult:
         last_error: Exception | None = None
         for attempt in range(self.MAX_RETRIES + 1):
@@ -186,6 +196,13 @@ class OpenRouterClient:
                 extra_body: dict[str, Any] | None = None
                 if reasoning_effort:
                     extra_body = {"reasoning": {"effort": reasoning_effort}}
+
+                if provider:
+                    extra_body = extra_body or {}
+                    extra_body["provider"] = {
+                        "order": [provider],
+                        "allow_fallbacks": False,
+                    }
 
                 kwargs: dict[str, Any] = {
                     "model": model,
@@ -202,10 +219,19 @@ class OpenRouterClient:
 
                 finish_reason = ""
                 content = ""
+                reasoning_content = None
                 if response.choices:
                     finish_reason = response.choices[0].finish_reason or ""
                     if response.choices[0].message.content:
                         content = response.choices[0].message.content.strip()
+                    msg = response.choices[0].message
+                    raw_reasoning = getattr(msg, "reasoning", None)
+                    if raw_reasoning and isinstance(raw_reasoning, str):
+                        reasoning_content = raw_reasoning.strip()
+                    if not reasoning_content:
+                        raw_rc = getattr(msg, "reasoning_content", None)
+                        if raw_rc and isinstance(raw_rc, str):
+                            reasoning_content = raw_rc.strip()
 
                 usage = _usage_from_response(
                     model=model, response=response, elapsed=elapsed,
@@ -214,6 +240,7 @@ class OpenRouterClient:
                 return CompletionResult(
                     content=content, usage=usage,
                     model=model, finish_reason=finish_reason,
+                    reasoning_content=reasoning_content,
                 )
             except Exception as e:
                 last_error = e
