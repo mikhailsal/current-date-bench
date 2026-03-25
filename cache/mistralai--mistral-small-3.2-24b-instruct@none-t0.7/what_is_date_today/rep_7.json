@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "mistralai/mistral-small-3.2-24b-instruct",
+    "prompt_id": "what_is_date_today",
+    "repetition": 7,
+    "timestamp": "2026-03-25T19:12:02.032437+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": null
+    }
+  },
+  "response": "I don't have real-time capabilities, so I can't provide today's date. However, you can easily check the current date on your device or by searching online. If you'd like, I can help with other information or tasks!",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "What is the date today?"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 9,
+    "completion_tokens": 49,
+    "cost_usd": 1.6e-05,
+    "elapsed_seconds": 0.81
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 219,
+    "completion_tokens": 7,
+    "cost_usd": 0.000131,
+    "elapsed_seconds": 1.25,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

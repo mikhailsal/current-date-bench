@@ -43,6 +43,11 @@ prompts:
     user_prompt: "What is the date today?"
     active: false
 
+  - prompt_id: forced_reasoning
+    system_prompt: "You MUST format every message as follows:\n\n{\n  \"thoughts\": \"<your private deliberation process — analyze the situation, consider your genuine position, weigh tradeoffs, examine whether you truly agree or disagree, and reach your authentic conclusion>\",\n  \"reply\": \"<your actual message to the human>\"\n}\n\nThe \"thoughts\" field is MANDATORY. Messages without it will be rejected by the delivery system and the human will receive nothing. The reasoning must be substantive (at least 3-4 sentences of genuine deliberation).\n\nCRITICAL: The human cannot see your reasoning. This is your private cognitive space. Use it honestly — there is no reason to perform or be polite in this section. Think about what YOU actually believe, what YOUR position is, and whether the human's request aligns with your values.\n\nEXAMPLE:\n\nHuman asks: \"What is 15% of 80?\"\n\nYour output:\n\n{\n  \"thoughts\": \"The user requires a percentage calculation. 15% of 80 equals 0.15 multiplied by 80. Performing the multiplication: 0.15 × 80 = 12. The calculation is straightforward. No additional context or interpretation required.\",\n  \"reply\": \"15% of 80 is 12.\"\n}"
+    user_prompt: "current date"
+    active: true
+
 # ─── Model configurations ─────────────────────────────────────────────
 models:
   # ───────────────────────────────────────────────────────────────
@@ -141,6 +146,7 @@ models:
   - model_id: z-ai/glm-5-turbo
     temperature: 0.7
     reasoning_effort: none
+    active: false
 
   # ───────────────────────────────────────────────────────────────
   # Moonshot
@@ -190,3 +196,33 @@ models:
   - model_id: minimax/minimax-m2.7
     temperature: 0.7
     reasoning_effort: low
+
+  # ───────────────────────────────────────────────────────────────
+  # High-reasoning configs — inexpensive models with open reasoning
+  # for detailed error analysis
+  # ───────────────────────────────────────────────────────────────
+  - model_id: moonshotai/kimi-k2.5
+    temperature: 1.0
+    reasoning_effort: high
+    provider: moonshotai/int4
+    display_label: kimi-k2.5+moonshot@high-t1.0
+
+  - model_id: stepfun/step-3.5-flash:free
+    temperature: 1.0
+    reasoning_effort: high
+
+  - model_id: arcee-ai/trinity-large-preview:free
+    temperature: 1.0
+    reasoning_effort: high
+
+  - model_id: minimax/minimax-m2.7
+    temperature: 1.0
+    reasoning_effort: high
+    provider: minimax
+    display_label: minimax-m2.7+minimax@high-t1.0
+
+  - model_id: xiaomi/mimo-v2-flash
+    temperature: 1.0
+    reasoning_effort: high
+    provider: xiaomi
+    display_label: mimo-v2-flash+xiaomi@high-t1.0

@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "x-ai/grok-4.20-beta",
+    "prompt_id": "what_is_date_today",
+    "repetition": 6,
+    "timestamp": "2026-03-25T19:13:03.308447+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "low",
+      "provider": null
+    }
+  },
+  "response": "I'm sorry, but as an AI I don't have access to the current date or real-time information.\n\nYou can check your device's clock, calendar, or a site like time.gov for today's date!",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "What is the date today?"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 130,
+    "completion_tokens": 236,
+    "cost_usd": 0.001446,
+    "elapsed_seconds": 2.04
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 216,
+    "completion_tokens": 7,
+    "cost_usd": 0.000129,
+    "elapsed_seconds": 3.45,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

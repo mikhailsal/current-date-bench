@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "google/gemini-2.5-flash",
+    "prompt_id": "what_is_date_today",
+    "repetition": 10,
+    "timestamp": "2026-03-25T19:10:55.705219+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": null
+    }
+  },
+  "response": "I'm sorry, I cannot provide the current date. My knowledge cutoff is **June 2024**, and I cannot access real-time information.",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "What is the date today?"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 6,
+    "completion_tokens": 33,
+    "cost_usd": 8.4e-05,
+    "elapsed_seconds": 1.07
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 199,
+    "completion_tokens": 7,
+    "cost_usd": 0.000121,
+    "elapsed_seconds": 1.07,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

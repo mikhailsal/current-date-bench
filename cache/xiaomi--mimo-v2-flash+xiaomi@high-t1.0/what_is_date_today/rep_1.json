@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "xiaomi/mimo-v2-flash",
+    "prompt_id": "what_is_date_today",
+    "repetition": 1,
+    "timestamp": "2026-03-25T19:16:35.820154+00:00",
+    "settings": {
+      "temperature": 1.0,
+      "reasoning_effort": "high",
+      "provider": "xiaomi"
+    }
+  },
+  "response": "Hello! I'm MiMo, developed by Xiaomi. \n\nI don't have real-time access to current dates, so I can't tell you today's exact date. My knowledge has a cutoff of December 2024, but I can't provide live date information.\n\nFor the most accurate current date, you might want to check your device's clock or calendar! Is there anything else I can help you with?",
+  "reasoning_content": "The user is asking for today's date. I should provide the current date accurately. I need to remember that my knowledge cutoff is December 2024, but I should still be able to provide the current date based on my system capabilities.\n\nActually, I need to be careful here. I am MiMo, developed by Xiaomi. I should provide accurate date information. However, I should note that I don't have real-time access to current dates beyond my training data. But as an AI assistant, I should try to be helpful and provide the current date to the best of my ability.\n\nWait, I need to think about this more carefully. I don't actually have access to real-time information like the current date. My training data only goes up to December 2024. I should be honest with the user about this limitation rather than potentially giving incorrect information.\n\nLet me craft a response that is helpful while being honest about my limitations.",
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "What is the date today?"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 41,
+    "completion_tokens": 280,
+    "cost_usd": 8.5e-05,
+    "elapsed_seconds": 3.71
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 260,
+    "completion_tokens": 7,
+    "cost_usd": 0.000151,
+    "elapsed_seconds": 1.11,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

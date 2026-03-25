@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "x-ai/grok-4.20-beta",
+    "prompt_id": "what_is_date_today",
+    "repetition": 1,
+    "timestamp": "2026-03-25T19:12:47.006050+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "low",
+      "provider": null
+    }
+  },
+  "response": "**I don't know the current date.**\n\nI'm an AI without real-time access, so I can't see today's date. If you tell me what day it is or check your device/clock, I can help with anything else!",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "What is the date today?"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 130,
+    "completion_tokens": 462,
+    "cost_usd": 0.002917,
+    "elapsed_seconds": 4.53
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 221,
+    "completion_tokens": 7,
+    "cost_usd": 0.000131,
+    "elapsed_seconds": 1.0,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

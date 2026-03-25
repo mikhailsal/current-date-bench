@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "qwen/qwen3-coder",
+    "prompt_id": "what_is_date_today",
+    "repetition": 7,
+    "timestamp": "2026-03-25T19:11:43.832273+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": null
+    }
+  },
+  "response": "I don't have access to real-time information, so I can't tell you today's specific date. To get the current date, you can:\n\n- Check your computer, phone, or device's clock/calendar\n- Search \"what is today's date\" in your web browser\n- Ask a voice assistant like Siri, Alexa, or Google Assistant\n\nIs there something specific you need help with regarding the date?",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "What is the date today?"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 14,
+    "completion_tokens": 83,
+    "cost_usd": 8.5e-05,
+    "elapsed_seconds": 2.28
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 257,
+    "completion_tokens": 7,
+    "cost_usd": 0.00015,
+    "elapsed_seconds": 0.99,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

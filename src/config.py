@@ -26,10 +26,17 @@ CONFIGS_PATH = PROJECT_ROOT / "configs" / "models.yaml"
 # ---------------------------------------------------------------------------
 # Token / generation limits
 # ---------------------------------------------------------------------------
-RESPONSE_MAX_TOKENS = 256
+RESPONSE_MAX_TOKENS = 512
 RESPONSE_TEMPERATURE = 0.7
 JUDGE_MAX_TOKENS = 128
 JUDGE_TEMPERATURE = 0.0
+
+MAX_TOKENS_BY_REASONING: dict[str, int] = {
+    "none": 512,
+    "low": 4096,
+    "medium": 8192,
+    "high": 16384,
+}
 
 # ---------------------------------------------------------------------------
 # OpenRouter
@@ -203,6 +210,7 @@ class ModelConfig:
     temperature_supported: bool = True
     active: bool = True
     provider: str | None = None
+    max_tokens: int | None = None
 
     @property
     def label(self) -> str:
@@ -215,6 +223,12 @@ class ModelConfig:
     @property
     def effective_reasoning(self) -> str:
         return self.reasoning_effort if self.reasoning_effort is not None else get_reasoning_effort(self.model_id)
+
+    @property
+    def effective_max_tokens(self) -> int:
+        if self.max_tokens is not None:
+            return self.max_tokens
+        return MAX_TOKENS_BY_REASONING.get(self.effective_reasoning, RESPONSE_MAX_TOKENS)
 
     @property
     def config_slug(self) -> str:
@@ -346,6 +360,10 @@ def load_model_configs(path: Path | None = None) -> list[ModelConfig]:
         active = entry.get("active", True)
         provider = entry.get("provider") or None
 
+        max_tokens = entry.get("max_tokens")
+        if max_tokens is not None:
+            max_tokens = int(max_tokens)
+
         label = entry.get("display_label") or generate_display_label(
             model_id, reasoning, temperature,
         )
@@ -358,6 +376,7 @@ def load_model_configs(path: Path | None = None) -> list[ModelConfig]:
             temperature_supported=temp_supported,
             active=active,
             provider=provider,
+            max_tokens=max_tokens,
         )
         if cfg.label not in MODEL_CONFIGS:
             register_config(cfg)

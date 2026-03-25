@@ -13,8 +13,6 @@ from rich.console import Console
 from src.cache import load_cached_response, save_response
 from src.config import (
     NUM_REPETITIONS,
-    RESPONSE_MAX_TOKENS,
-    RESPONSE_TEMPERATURE,
     ModelConfig,
     PromptConfig,
 )
@@ -65,7 +63,7 @@ def run_prompt_experiment(
         result = client.chat(
             model=model_id,
             messages=messages,
-            max_tokens=RESPONSE_MAX_TOKENS,
+            max_tokens=model_config.effective_max_tokens,
             temperature=temperature,
             reasoning_effort=reasoning,
             provider=model_config.provider,

@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "moonshotai/kimi-k2.5",
+    "prompt_id": "what_is_date_today",
+    "repetition": 4,
+    "timestamp": "2026-03-25T19:12:48.246360+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": "moonshotai/int4"
+    }
+  },
+  "response": "I don't have access to real-time information, so I don't know the current date. \n\nYou can easily find today's date by:\n- Checking your device's clock/calendar\n- Asking a voice assistant (Siri, Google Assistant, Alexa)\n- Searching \"what is today's date\" in a search engine\n\nIs there something else I can help you with?",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "What is the date today?"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 13,
+    "completion_tokens": 75,
+    "cost_usd": 0.000226,
+    "elapsed_seconds": 2.99
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 251,
+    "completion_tokens": 7,
+    "cost_usd": 0.000147,
+    "elapsed_seconds": 1.1,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

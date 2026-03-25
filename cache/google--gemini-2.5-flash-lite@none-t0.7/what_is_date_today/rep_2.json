@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "google/gemini-2.5-flash-lite",
+    "prompt_id": "what_is_date_today",
+    "repetition": 2,
+    "timestamp": "2026-03-25T19:10:48.775987+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": null
+    }
+  },
+  "response": "I am a large language model, and I do not have access to real-time information, including the current date. Therefore, I cannot tell you what today's date is.",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "What is the date today?"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 6,
+    "completion_tokens": 37,
+    "cost_usd": 1.5e-05,
+    "elapsed_seconds": 0.63
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 203,
+    "completion_tokens": 7,
+    "cost_usd": 0.000122,
+    "elapsed_seconds": 0.96,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

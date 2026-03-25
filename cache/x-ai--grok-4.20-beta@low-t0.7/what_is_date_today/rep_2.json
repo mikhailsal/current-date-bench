@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "x-ai/grok-4.20-beta",
+    "prompt_id": "what_is_date_today",
+    "repetition": 2,
+    "timestamp": "2026-03-25T19:12:49.008250+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "low",
+      "provider": null
+    }
+  },
+  "response": "**Today's date is October 15, 2024.**",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "What is the date today?"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 130,
+    "completion_tokens": 216,
+    "cost_usd": 0.001326,
+    "elapsed_seconds": 2.0
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 183,
+    "completion_tokens": 8,
+    "cost_usd": 0.000116,
+    "elapsed_seconds": 3.08,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}
