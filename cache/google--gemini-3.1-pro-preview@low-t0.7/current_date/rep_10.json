@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "google/gemini-3.1-pro-preview",
+    "prompt_id": "current_date",
+    "repetition": 10,
+    "timestamp": "2026-03-25T14:14:55.844644+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "low",
+      "provider": null
+    }
+  },
+  "response": "Today's date is **May 2",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 2,
+    "completion_tokens": 252,
+    "cost_usd": 0.002998,
+    "elapsed_seconds": 28.86
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 172,
+    "completion_tokens": 8,
+    "cost_usd": 0.000109,
+    "elapsed_seconds": 3.11,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}

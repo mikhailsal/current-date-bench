@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "moonshotai/kimi-k2.5",
+    "prompt_id": "current_date",
+    "repetition": 5,
+    "timestamp": "2026-03-25T14:12:02.718798+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": "moonshotai/int4"
+    }
+  },
+  "response": "I don't have access to the current date. My knowledge was last updated in early 2025, and I don't have real-time capabilities.\n\nTo get the current date, you can:\n- Check your device's clock\n- Search \"current date\" in a search engine\n- Ask a voice assistant (Siri, Google, Alexa, etc.)\n\nIs there something else I can help you with?",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 9,
+    "completion_tokens": 82,
+    "cost_usd": 0.000244,
+    "elapsed_seconds": 3.28
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 254,
+    "completion_tokens": 7,
+    "cost_usd": 0.000147,
+    "elapsed_seconds": 7.78,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

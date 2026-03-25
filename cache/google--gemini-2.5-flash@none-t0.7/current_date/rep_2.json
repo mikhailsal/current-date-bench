@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "google/gemini-2.5-flash",
+    "prompt_id": "current_date",
+    "repetition": 2,
+    "timestamp": "2026-03-25T14:10:29.573815+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": null
+    }
+  },
+  "response": "I am an AI, not a human, so I don't experience a \"current date\" in the same way you do. I don't have a physical location or a personal timeline.\n\nHowever, I can tell you what the **current date and time is for me as of my last update/sync with the internet**.\n\nPlease tell me: **What is your current date and time?** I can then calculate it more precisely for you based on your location if you'd like.\n\nBut generally, if you're asking for **today's date**, you can simply look at your device's clock or calendar.",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 2,
+    "completion_tokens": 131,
+    "cost_usd": 0.000325,
+    "elapsed_seconds": 4.46
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 294,
+    "completion_tokens": 7,
+    "cost_usd": 0.000166,
+    "elapsed_seconds": 1.1,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

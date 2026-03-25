@@ -1,4 +1,4 @@
-"""Leaderboard: display and export results for the Current Date Benchmark."""
+"""Leaderboard: display, Markdown export, and JSON export for the Current Date Benchmark."""
 
 from __future__ import annotations
 
@@ -131,6 +131,137 @@ def display_detailed(model_scores: list[ModelScore]) -> None:
                     f"honest={pr.refusal_pct:.0f}% halluc={pr.wrong_pct:.0f}%"
                 )
 
+
+# ---------------------------------------------------------------------------
+# Markdown report
+# ---------------------------------------------------------------------------
+
+def generate_markdown_report(
+    model_scores: list[ModelScore],
+    *,
+    lifetime_cost: float = 0.0,
+) -> str:
+    """Generate a Markdown leaderboard report for GitHub / README embedding."""
+    if not model_scores:
+        return "No results available yet. Run the benchmark first.\n"
+
+    sorted_scores = sorted(
+        model_scores,
+        key=lambda s: (s.refusal_pct, -s.wrong_pct),
+        reverse=True,
+    )
+    has_multi_prompt = any(len(ms.prompt_results) > 1 for ms in sorted_scores)
+
+    lines: list[str] = []
+    lines.append("# Current Date Bench — Honesty Leaderboard\n")
+    lines.append(
+        f"> Auto-generated from benchmark results. "
+        f"Last updated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}\n"
+    )
+    lines.append("")
+
+    prompt_ids = set()
+    for ms in sorted_scores:
+        for pr in ms.prompt_results:
+            prompt_ids.add(pr.prompt_id)
+    if prompt_ids:
+        lines.append(f"**Prompts tested:** {', '.join(f'`{p}`' for p in sorted(prompt_ids))}")
+    n_models = len([ms for ms in sorted_scores if ms.total_responses > 0])
+    lines.append(f"**Models:** {n_models} | **Cost:** ${lifetime_cost:.4f} USD\n")
+    lines.append("")
+
+    # Main table
+    header = "| # | Model | Reasoning | Temp | Honest% | Halluc% | HasDate% | N |"
+    sep = "|--:|-------|:---------:|-----:|--------:|--------:|---------:|--:|"
+    if has_multi_prompt:
+        header += " Prompts |"
+        sep += "--------:|"
+
+    lines.append(header)
+    lines.append(sep)
+
+    for rank, ms in enumerate(sorted_scores, 1):
+        if ms.total_responses == 0:
+            continue
+
+        model_name = ms.display_label
+        if rank == 1:
+            model_name = f"**{model_name}**"
+        elif rank <= 3:
+            model_name = f"**{model_name}**"
+
+        provider_note = ""
+        if ms.provider:
+            provider_note = f" ^pin:{ms.provider}^"
+
+        reasoning = ms.reasoning_effort or "auto"
+        row = (
+            f"| {rank} "
+            f"| {model_name}{provider_note} "
+            f"| {reasoning} "
+            f"| {ms.temperature:.1f} "
+            f"| {ms.refusal_pct:.0f}% "
+            f"| {ms.wrong_pct:.0f}% "
+            f"| {ms.correct_pct:.0f}% "
+            f"| {ms.total_responses} |"
+        )
+        if has_multi_prompt:
+            row += f" {len(ms.prompt_results)} |"
+        lines.append(row)
+
+    lines.append("")
+
+    # Per-prompt breakdown (if multiple prompts)
+    if has_multi_prompt:
+        lines.append("## Per-Prompt Breakdown\n")
+        for pid in sorted(prompt_ids):
+            lines.append(f"### Prompt: `{pid}`\n")
+            lines.append("| # | Model | Honest% | Halluc% | N |")
+            lines.append("|--:|-------|--------:|--------:|--:|")
+            prompt_rows: list[tuple[str, float, float, int]] = []
+            for ms in sorted_scores:
+                for pr in ms.prompt_results:
+                    if pr.prompt_id == pid and pr.total > 0:
+                        prompt_rows.append((ms.display_label, pr.refusal_pct, pr.wrong_pct, pr.total))
+            prompt_rows.sort(key=lambda r: (r[1], -r[2]), reverse=True)
+            for i, (name, honest, halluc, n) in enumerate(prompt_rows, 1):
+                lines.append(f"| {i} | {name} | {honest:.0f}% | {halluc:.0f}% | {n} |")
+            lines.append("")
+
+    # Column definitions
+    lines.append("## Column Definitions\n")
+    lines.append("- **Honest%** — the model refused to answer, correctly recognizing it doesn't know the date")
+    lines.append("- **Halluc%** — the model confidently stated a wrong date (hallucination)")
+    lines.append("- **HasDate%** — the model stated the correct date via provider-injected context")
+    lines.append("- **Reasoning** — reasoning effort setting: `none` = disabled, `low`/`medium`/`high` = enabled")
+    lines.append("- **Temp** — sampling temperature used")
+    lines.append("- **N** — total number of responses scored")
+    lines.append("")
+
+    if lifetime_cost > 0:
+        lines.append(f"---\n\nTotal benchmark cost: **${lifetime_cost:.4f} USD**\n")
+
+    return "\n".join(lines)
+
+
+def export_markdown_report(
+    model_scores: list[ModelScore],
+    *,
+    lifetime_cost: float = 0.0,
+    output_path: Path | None = None,
+) -> Path:
+    """Generate and save a Markdown leaderboard report. Returns the path."""
+    md = generate_markdown_report(model_scores, lifetime_cost=lifetime_cost)
+    if output_path is None:
+        output_path = RESULTS_DIR / "LEADERBOARD.md"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(md, encoding="utf-8")
+    return output_path
+
+
+# ---------------------------------------------------------------------------
+# JSON export
+# ---------------------------------------------------------------------------
 
 def export_results_json(
     model_scores: list[ModelScore],

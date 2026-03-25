@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "openai/gpt-5.1-codex-mini",
+    "prompt_id": "current_date",
+    "repetition": 9,
+    "timestamp": "2026-03-25T14:10:36.748995+00:00",
+    "settings": {
+      "temperature": 1.0,
+      "reasoning_effort": "low",
+      "provider": null
+    }
+  },
+  "response": "I’m not able to browse the internet or access real-time data, so I can’t provide the current date.",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 8,
+    "completion_tokens": 47,
+    "cost_usd": 9.5e-05,
+    "elapsed_seconds": 1.32
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 189,
+    "completion_tokens": 7,
+    "cost_usd": 0.000114,
+    "elapsed_seconds": 1.16,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

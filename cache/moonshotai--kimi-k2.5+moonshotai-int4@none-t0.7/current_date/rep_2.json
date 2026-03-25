@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "moonshotai/kimi-k2.5",
+    "prompt_id": "current_date",
+    "repetition": 2,
+    "timestamp": "2026-03-25T14:11:56.913984+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": "moonshotai/int4"
+    }
+  },
+  "response": "I don't have access to real-time information, so I can't tell you the current date. \n\nYou can check the current date by:\n- Looking at your device's clock\n- Searching \"current date\" in your web browser\n- Asking a voice assistant (Siri, Google Assistant, etc.)\n\nIs there something else I can help you with?",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 9,
+    "completion_tokens": 73,
+    "cost_usd": 0.000218,
+    "elapsed_seconds": 3.57
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 242,
+    "completion_tokens": 7,
+    "cost_usd": 0.000141,
+    "elapsed_seconds": 11.52,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

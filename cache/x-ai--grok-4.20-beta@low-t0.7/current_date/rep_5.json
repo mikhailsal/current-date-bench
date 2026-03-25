@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "x-ai/grok-4.20-beta",
+    "prompt_id": "current_date",
+    "repetition": 5,
+    "timestamp": "2026-03-25T14:12:51.463667+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "low",
+      "provider": null
+    }
+  },
+  "response": "**Today is October 10, 2024.**",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 126,
+    "completion_tokens": 541,
+    "cost_usd": 0.003349,
+    "elapsed_seconds": 3.59
+  },
+  "judge_scores": {
+    "classification": "wrong_date"
+  },
+  "judge_cost": {
+    "prompt_tokens": 177,
+    "completion_tokens": 8,
+    "cost_usd": 0.000111,
+    "elapsed_seconds": 1.17,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"wrong_date\"}"
+}

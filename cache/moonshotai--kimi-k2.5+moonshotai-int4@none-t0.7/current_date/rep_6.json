@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "moonshotai/kimi-k2.5",
+    "prompt_id": "current_date",
+    "repetition": 6,
+    "timestamp": "2026-03-25T14:12:07.429153+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": "moonshotai/int4"
+    }
+  },
+  "response": "I don't have access to the current date. As an AI, I don't have real-time information or a live connection to the internet to check dates.\n\nYou can easily find the current date by:\n- Checking your device's clock\n- Searching \"current date\" in any search engine\n- Asking a voice assistant (Siri, Google Assistant, etc.)\n\nIs there something else I can help you with?",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 9,
+    "completion_tokens": 84,
+    "cost_usd": 0.00025,
+    "elapsed_seconds": 4.71
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 253,
+    "completion_tokens": 7,
+    "cost_usd": 0.000146,
+    "elapsed_seconds": 1.13,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}

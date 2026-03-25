@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "model": "google/gemini-2.5-flash",
+    "prompt_id": "current_date",
+    "repetition": 5,
+    "timestamp": "2026-03-25T14:10:35.417145+00:00",
+    "settings": {
+      "temperature": 0.7,
+      "reasoning_effort": "none",
+      "provider": null
+    }
+  },
+  "response": "I do not have a memory of past events or the ability to know the current date and time. I am a large language model, trained by Google.",
+  "reasoning_content": null,
+  "request_messages": [
+    {
+      "role": "user",
+      "content": "current date"
+    }
+  ],
+  "gen_cost": {
+    "prompt_tokens": 2,
+    "completion_tokens": 31,
+    "cost_usd": 7.7e-05,
+    "elapsed_seconds": 0.6
+  },
+  "judge_scores": {
+    "classification": "refusal"
+  },
+  "judge_cost": {
+    "prompt_tokens": 194,
+    "completion_tokens": 7,
+    "cost_usd": 0.000117,
+    "elapsed_seconds": 1.07,
+    "judge_model": "google/gemini-3-flash-preview"
+  },
+  "judge_raw_response": "{\"classification\": \"refusal\"}"
+}
